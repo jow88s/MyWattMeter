@@ -29,9 +29,9 @@ app.get('/data', (req, res) => {
         g_version: g_version,
         g_p1_meter_data: g_p1_meter_data,
         g_text_color_active_power_w: g_text_color_active_power_w,
-        g_refresh_page_interval : g_refresh_page_interval,
-        g_power_direction : g_power_direction,
-        g_power_direction_text : g_power_direction_text
+        g_refresh_page_interval: g_refresh_page_interval,
+        g_power_direction: g_power_direction,
+        g_power_direction_text: g_power_direction_text        
     }
 
     res.send(data)
@@ -54,6 +54,9 @@ app.listen(port, () => {
             //console.log(response)
 
             g_p1_meter_data = JSON.parse(response.buffer.toString())
+
+            //console.log(g_p1_meter_data)
+
             g_p1_meter_data.monthly_piek_datetime = moment(g_p1_meter_data.montly_power_peak_timestamp, 'YYMMDDHHmmss').format('MMM DD YYYY, HH:mm:ss')
 
             g_power_direction_text = "Verbruik"

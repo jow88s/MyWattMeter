@@ -5,9 +5,9 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 </head>
 
@@ -20,7 +20,7 @@
         <hr />
 
         <div class="class-active-power-w" style="font-size: 50px; color: black;">
-            <b><span id="id-power-direction-text" >Stroom</span> ( Watt )</b>
+            <b><span id="id-power-direction-text">Stroom</span> ( Watt )</b>
         </div>
         <div id="id-active-power-w" class="class-active-power-w" style="font-size: 150px; color: black;">
             Please wait
@@ -34,18 +34,25 @@
                     <div>
                         <small>Capaciteits tarief</small>
                     </div>
-                    Maandelijkse stroom piek
-                    <div>Steefdoel piekverbruik : 5000</div>
+                    Maandelijkse piek
+                    <div>Steefdoel piek : 5000</div>
                 </th>
                 <td style="font-size: large;">
                     <div>
-                        <span id="id-monthly-power-peak">                            
-                        </span> Watt
+                        <span id="id-monthly-power-peak"></span> Watt
                     </div>
 
-                    <div id="id-monthly-piek-datetime">      
-                        Please wait                  
+                    <div id="id-monthly-piek-datetime">
+                        Please wait
                     </div>
+                </td>
+            </tr>
+            <tr>
+                <th style="text-align: right;">
+                    <div>active_power_average_w</div>                    
+                </th>
+                <td style="font-size: large;">
+                    <span id="id-active-power-average-w"></span> Watt
                 </td>
             </tr>
         </table>
@@ -53,7 +60,7 @@
         <div>
             <small>v<span id="id-version"></span></small>
         </div>
-    
+
         <div id="id-refresh-millis" value="2500"></div>
 
     </div>
@@ -65,11 +72,12 @@
 
                 $.get('/data', function (data, status) {
 
+                    //console.log("data.g_p1_meter_data="+JSON.stringify(data.g_p1_meter_data))
 
                     var element = $("#id-version")
                     element.text(data.g_version)
 
-                    element = $("#id-active-power-w")              
+                    element = $("#id-active-power-w")
                     element.text(data.g_p1_meter_data.active_power_w)
 
                     element = $("#id-power-direction-text")
@@ -85,9 +93,12 @@
                     element.text(data.g_p1_meter_data.monthly_piek_datetime)
 
                     element = $("#id-refresh-millis")
-                    element.attr("value",data.g_refresh_page_interval)
+                    element.attr("value", data.g_refresh_page_interval)
+
+                    element = $("#id-active-power-average-w")
+                    element.text(data.g_p1_meter_data.active_power_average_w)
                 })
-            },$("#id-refresh-millis").attr("value")
+            }, $("#id-refresh-millis").attr("value")
 
             )
 
