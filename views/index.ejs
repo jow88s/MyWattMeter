@@ -1,0 +1,90 @@
+<!--Ejs File-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>    
+
+</head>
+
+
+<body>
+
+    <div style="margin: auto; width: 80%;">
+
+        <h1>Digitale Meter Fluvius ( P1 poort )</h1>
+        <hr />
+
+        <div class="class-active-power-w" style="font-size: 50px; color: black;">
+            <b><span id="id-power-direction-text" >Stroom</span> ( Watt )</b>
+        </div>
+        <div id="id-active-power-w" class="class-active-power-w" style="font-size: 150px; color: black;">
+            Please wait
+        </div>
+        <small><i>paars is verbruik / groen is injectie</i></small>
+
+        <table cellpadding="5" cellspacing="2" border="1px" style="margin-top: 25px;">
+            <tr>
+                <th style="text-align: right;">
+
+                    <div>
+                        <small>Capaciteits tarief</small>
+                    </div>
+                    Maandelijkse stroom piek
+                    <div>Steefdoel piekverbruik : 5000</div>
+                </th>
+                <td>
+                    <div>
+                        <span id="id-monthly-power-peak">                            
+                        </span> Watt
+                    </div>
+
+                    <div id="id-monthly-piek-datetime">      
+                        Please wait                  
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="id-refresh-millis" value="2500"></div>
+
+    <script>
+        $(document).ready(function () {
+
+            setInterval(() => {
+
+                $.get('/data', function (data, status) {
+
+                    var element = $("#id-active-power-w")                    
+                    element.text(data.g_p1_meter_data.active_power_w)
+
+                    element = $("#id-power-direction-text")
+                    element.text(data.g_power_direction_text)
+
+                    element = $(".class-active-power-w")
+                    element.css("color", data.g_text_color_active_power_w)
+
+                    element = $("#id-monthly-power-peak")
+                    element.text(data.g_p1_meter_data.montly_power_peak_w)
+
+                    element = $("#id-monthly-piek-datetime")
+                    element.text(data.g_p1_meter_data.monthly_piek_datetime)
+
+                    element = $("#id-refresh-millis")
+                    element.attr("value",data.g_refresh_page_interval)
+                })
+            },$("#id-refresh-millis").attr("value")
+
+            )
+
+        })
+    </script>
+
+</body>
+
+</html>
