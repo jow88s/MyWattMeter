@@ -1,3 +1,6 @@
+
+var g_version = "1.0.0"
+
 const express = require('express')
 const app = express()
 const port = 3000
@@ -23,6 +26,7 @@ app.get('/', (req, res) => {
 app.get('/data', (req, res) => {
 
     let data = {
+        g_version: g_version,
         g_p1_meter_data: g_p1_meter_data,
         g_text_color_active_power_w: g_text_color_active_power_w,
         g_refresh_page_interval : g_refresh_page_interval,

@@ -49,9 +49,14 @@
                 </td>
             </tr>
         </table>
-    </div>
+        <hr>
+        <div>
+            <small>v<span id="id-version"></span></small>
+        </div>
+    
+        <div id="id-refresh-millis" value="2500"></div>
 
-    <div id="id-refresh-millis" value="2500"></div>
+    </div>
 
     <script>
         $(document).ready(function () {
@@ -60,7 +65,11 @@
 
                 $.get('/data', function (data, status) {
 
-                    var element = $("#id-active-power-w")                    
+
+                    var element = $("#id-version")
+                    element.text(data.g_version)
+
+                    element = $("#id-active-power-w")              
                     element.text(data.g_p1_meter_data.active_power_w)
 
                     element = $("#id-power-direction-text")
