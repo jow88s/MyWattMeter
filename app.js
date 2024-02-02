@@ -57,7 +57,7 @@ app.listen(port, () => {
 
             //console.log(g_p1_meter_data)
 
-            g_p1_meter_data.monthly_piek_datetime = moment(g_p1_meter_data.montly_power_peak_timestamp, 'YYMMDDHHmmss').format('MMM DD YYYY, HH:mm:ss')
+            g_p1_meter_data.monthly_piek_datetime = moment(g_p1_meter_data.montly_power_peak_timestamp, 'YYMMDDHHmmss').format('DD MMM YYYY, HH:mm:ss')
 
             g_power_direction_text = "Verbruik"
             g_text_color_active_power_w = "purple"
