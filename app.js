@@ -12,6 +12,7 @@ const moment = require('moment');
 app.set('view engine', 'ejs');
 
 var g_homewizard_hostname = 'http://192.168.0.107/api/v1/data'
+//var g_homewizard_hostname = 'http://HW-p1meter-0F745C/api/v1/data' // not working
 var g_p1_meter_data = {}
 var g_text_color_active_power_w = "black"
 var g_refresh_page_interval = 2500
